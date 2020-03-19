@@ -25,9 +25,23 @@ server.get('/users/:userID/books/:bookId', (req, res) => {
 server.get('/example/b', (req, res, next) => {
     console.log('first handler');
     next();
-}, function (req, res) {
+}, (req, res) => {
     console.log('second handler')
     res.send('second handler')
 });
+
+// chainable route handlers
+
+server.route('/book')
+    .get((req, res) => {
+        res.send('Get a random book.');
+    })
+    .post((req, res) => {
+        res.send('Add a book')
+    })
+    .put((req, res) => {
+        res.send('Update a book');
+    })
+
 
 module.exports = server;
